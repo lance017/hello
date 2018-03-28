@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 public class demo {
     public static void main(String[] args) {
@@ -10,11 +9,18 @@ public class demo {
 
         String path = "/Users/mingchuang"+File.separator+"name.text";
 
-        createFile(path);
+//        createFile(path);
 
-        delete(path);
+//        delete(path);
 
         printListName("/Users/mingchuang/music");
+
+        try {
+            write(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -27,9 +33,9 @@ public class demo {
             // 创建文件 这个方法父文件夹必须存在否则创建失败
             file.createNewFile();
             // 创建文件夹，这个方法父文件夹必须存在否则创建失败
-            file.mkdir();
+//            file.mkdir();
             // 创建文件夹，如果父文件夹不存在可以递归创建
-            file.mkdirs();
+//            file.mkdirs();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -66,4 +72,32 @@ public class demo {
             System.out.println("该路径不是文件夹");
         }
     }
+
+
+    private static void write(String path) throws IOException {
+        File file = new File(path);
+
+//        file.createNewFile();
+        OutputStream stream = new FileOutputStream(file,true);
+        byte[] bytes = "你好".getBytes();
+        for (byte b : bytes) {
+            stream.write(b);
+        }
+//        stream.write(bytes);
+        stream.close();
+
+    }
+
+//    private static void read(String path) throws FileNotFoundException {
+//        File file = new File(path);
+//        InputStream stream = new FileInputStream(file);
+//        byte[] bytes = new b
+//
+//    }
+//
+//    private static void writeForString(String path) {
+//        File file = new File(path);
+//
+//
+//    }
 }
